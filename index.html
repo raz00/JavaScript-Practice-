@@ -1,0 +1,81 @@
+<html>
+<head>
+	<title></title>
+	<style>
+		.box{
+			height:300px;
+			width:300px;
+			border:2px solid black;
+			float:left;
+			margin:5px;
+		}
+	</style>
+</head>
+<body>
+	<div id="box" class="box"></div>
+	<div id="box2" class="box"></div>
+	<!--<div style="clear:both"></div>-->
+	<div id="clock"></div>
+
+	<form>
+		<input type="text" id="fname" name="fname" placeholder="Enter First Name"/><br/>
+		<input type="text" id="lname" name="lname" placeholder="Enter Last Name"/><br/>
+		<input type="email" id="email" name="email" placeholder="Enter Email"/><br/>				
+		<button type="submit" id="save-data">Save</button>
+	</form>
+
+
+	<script>
+		var colors=["green","blue","red","yellow","orange","black"];
+		var i=0;
+		var box=document.getElementById("box");
+		var box2=document.getElementById("box2");
+		var clock=document.getElementById("clock");
+
+		function getObj(key){
+			return document.getElementById(key);
+		}
+
+		var fname=getObj("fname");
+		var lname=getObj("lname");
+		var email=getObj("email");
+
+		var saveBtn=getObj("save-data");
+
+		saveBtn.onclick=function(){
+			alert(fname.value + " " + lname.value);
+			return false;
+		};
+
+		fname.onkeyup=function(){
+			clock.innerHTML=this.value;
+		}
+
+
+		/*setInterval(function(){
+
+			var date=new Date();
+			clock.innerHTML=date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+
+			box.style.background=colors[i];
+			i++;
+			if(i==colors.length){
+				i=0;
+			}
+		},1000)
+		var j=0;
+		setInterval(function(){
+			if(j==colors.length){
+				j=0;
+			}
+			j++;
+			box2.style.background=colors[j];
+
+			
+			
+		},1000)*/
+		
+	</script>
+
+</body>
+</html>

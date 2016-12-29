@@ -1,0 +1,76 @@
+<html>
+<head>
+	<title>Single Page Application</title>
+	<script src="js/models/Student.model.js"></script>
+	<script src="js/services/Student.service.js"></script>
+</head>
+<body>
+	<h1>Student Management System</h1>
+
+	<a href="javascript:void(0)" id="add-std-btn">Add Student</a>
+	<a href="javascript:void(0)" id="show-std-btn">Show Students</a>
+
+	<div id="student-list"></div>
+
+	<div id="student-dialog" style="display:none">
+	<form>
+		<input type="text" id="fname" name="fname" placeholder="Enter First Name"/><br/>
+		<input type="text" id="lname" name="lname" placeholder="Enter Last Name"/><br/>
+		<input type="email" id="email" name="email" placeholder="Enter Email"/><br/>
+		<label>
+		<input type="checkbox" id="status" name="status" />Status</label><br/>							
+		<button type="submit" id="save-data">Save</button>
+	</form>		
+	</div>
+
+<script>
+function getObj(key){
+	return document.getElementById(key);
+}
+var i=1;
+var addBtn=getObj("add-std-btn");
+var studentDialog=getObj("student-dialog");
+var fname=getObj("fname");
+var lname=getObj("lname");
+var email=getObj("email");
+var status=getObj("status");
+var saveBtn=getObj("save-data");
+var showBtn=getObj("show-std-btn");
+var resultBlock=getObj("student-list");
+
+var stdService=new StudentService();
+
+	addBtn.onclick=function(){
+		studentDialog.style.display="block";
+	};
+	
+
+	saveBtn.onclick=function(){
+		var std=new Student();
+		std.id=i;
+		std.firstName=fname.value;
+		std.lastName=lname.value;
+		std.email=email.value;
+		std.status=(status.checked)?true:false;
+		stdService.add(std);
+		i++;
+		studentDialog.style.display="none";
+		
+		return false;
+	};	
+
+	showBtn.onclick=function(){
+		var stdList=stdService.getAll();
+		var content="";
+		for (var i = 0; i < stdList.length; i++) {
+			content +="<li><h2>"+stdList[i].toString() + "</h2></li>";
+		};
+
+		resultBlock.innerHTML=content;
+	};
+
+
+
+</script>
+</body>
+</html>
